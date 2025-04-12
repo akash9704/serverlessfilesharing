@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://my-serverless-files-akash.s3.amazonaws.com/assets/styles.css">
+    <title>Download Files</title>
+</head>
+<body>
+  <h2>Available Files</h2>
+  <table border="1">
+    <thead>
+      <tr><th>Username</th><th>Filename</th><th>Timestamp</th><th>Download</th></tr>
+    </thead>
+    <tbody id="fileTable"></tbody>
+  </table>
+
+  <script>
+    async function loadFiles() {
+      const res = await fetch('https://el21exwys5.execute-api.us-east-1.amazonaws.com/list');
+      const files = await res.json();
+
+      const tbody = document.getElementById('fileTable');
+      files.forEach(f => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${f.username}</td>
+          <td>${f.filename}</td>
+          <td>${f.timestamp}</td>
+          <td><a href="${f.downloadURL}" target="_blank">Download</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    loadFiles();
+  </script>
+</body>
+</html>

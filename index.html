@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head >
+  <link rel="stylesheet" href="https://my-serverless-files-akash.s3.amazonaws.com/assets/styles.css">
+  <title>File Sharing Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Enter username" />
+  <button onclick="login()">Login</button>
+
+  <div id="options" style="display:none;">
+    <h3>Welcome, <span id="userDisplay"></span></h3>
+    <button onclick="goToUpload()">Upload File</button>
+    <button onclick="goToDownload()">Download Files</button>
+  </div>
+
+  <script>
+    function login() {
+      const u = document.getElementById('username').value;
+      if (u) {
+        localStorage.setItem('username', u);
+        document.getElementById('userDisplay').textContent = u;
+        document.getElementById('options').style.display = 'block';
+      }
+    }
+
+    function goToUpload() {
+      window.location.href = 'upload.html';
+    }
+
+    function goToDownload() {
+      window.location.href = 'download.html';
+    }
+  </script>
+</body>
+</html>
